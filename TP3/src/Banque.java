@@ -59,7 +59,7 @@ public class Banque {
   
   // Recherche du compte d'un client, ou null si pas trouvé
   public CompteBancaire recherche(String nom)   {
-    /*int i=0;
+    int i=0;
     while (( i<NB_MAX_CLIENT ) && ( !( (tabComptes[i].renvoyerTitulaire()).equals(nom) ) )) {
       i++;
     }
@@ -69,15 +69,22 @@ public class Banque {
     else {
       return (tabComptes[i]);
     }
-    */
-    for (int i=0; i<NB_MAX_CLIENT; i++) {
-      
-    }
+    
+//    for (int j=0; j<NB_MAX_CLIENT; j++) {
+//      
+//    }
   }
   
   // Dépot d'un montant sur le compte d'un client
   //   (retourne vrai si l'opération a pu être effectuée)
   public boolean depose(String nom, double montant) {
+    CompteBancaire c = recherche(nom);
+    if (c == null) {    //le compte client n'est pas repertorié
+      return false;
+    }
+    else {
+      
+    }
     // ######################################
     // ##########" A COMPLETER ##############
     // ######################################
