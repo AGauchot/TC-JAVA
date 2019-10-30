@@ -6,6 +6,7 @@
 //  Sauvegarde et relecture d'objets sur fichier.
 // -------------------------------------------------------
 
+import java.io.*;
 import java.util.Scanner;
 
 /* Classe regroupant nom et prix d'un produit. */
@@ -67,6 +68,40 @@ public class Catalogue {
         case 'A':
           for (Produit p : tabProduits) {
             p.afficher();
+          }
+          break;
+        case 'S' :  //crée un fichier qui sauvegarde l'affichage du catalogue
+          PrintWriter textOut = null;
+          try {
+            textOut = new PrintWriter (new FileWriter ("Catalogue_sauvegarde.txt"));
+            for (Produit p : tabProduits) {
+              textOut.println(p.renvoieNom() + " : " + p.renvoiePrix() + " EUROS");
+            }
+            
+            textOut.close();
+          } catch (IOException e) {
+            System.out.println(e.getMessage());
+          }
+          break;
+        case 'L' :  // à partir d'un fichier commençant par le nb de produits puis du type NomProduit Prix (ex : 2
+                    //                                                                                           Chaise 30
+                    //                                                                                           Table 100
+                    //                                                                                     ) 
+                    // crée un nouveau catalogue (en réécrivant par dessus celui existant)
+          try {
+            FileReader textIn = new FileReader("Catalogue_lecture.txt");
+            int nbProduits = textIn.read();
+            String nom;
+            int prix;
+            Produit p;
+            for (int i=0; i<nbProduits; i++) {
+              nom = textIn.read();
+              prix = textIn.read();
+            }
+            tabProduits = tab;
+            textIn.close();
+          } catch (IOException e) {
+            System.out.println(e.getMessage());
           }
           break;
         // ########################################################
